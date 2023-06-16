@@ -3,10 +3,10 @@ from src.channel import Channel
 if __name__ == '__main__':
     moscowpython = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
 
-    # получаем значения атрибутов
-    print(moscowpython.title)  # MoscowPython
-    print(moscowpython.video_count)  # 685 (может уже больше)
-    print(moscowpython.url)  # https://www.youtube.com/channel/UC-OVMPlMA3-YCIeg4z5z23A
+    # Получаем значения атрибутов
+    print(moscowpython._Channel__channel_title)  # MoscowPython
+    print(moscowpython._Channel__video_count)  # 685 (может уже больше)
+    print(moscowpython._Channel__channel_url)  # https://www.youtube.com/channel/UC-OVMPlMA3-YCIeg4z5z23A
 
     # менять не можем
     moscowpython.channel_id = 'Новое название'
