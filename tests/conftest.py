@@ -1,6 +1,7 @@
 import pytest
 import json
 from src.channel import Channel
+from src.video import Video, PLVideo
 from src.config import CHANNEL_ID, CHANNEL_ID_SECOND
 
 
@@ -67,3 +68,10 @@ def channel_info():
             }
         ]
     })
+@pytest.fixture
+def video():
+    return Video("AWX4JnAnjBE")
+
+@pytest.fixture
+def pl_video():
+    return PLVideo("4fObz_qw9u4", "PLv_zOGKKxVph_8g2Mqc3LMhj0M_BfasbC")
