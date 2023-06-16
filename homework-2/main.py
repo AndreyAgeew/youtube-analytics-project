@@ -9,7 +9,10 @@ if __name__ == '__main__':
     print(moscowpython._Channel__channel_url)  # https://www.youtube.com/channel/UC-OVMPlMA3-YCIeg4z5z23A
 
     # менять не можем
-    moscowpython.channel_id = 'Новое название'
+    try:
+        moscowpython.channel_id = 'Новое название'
+    except AttributeError:
+        print("AttributeError: property 'channel_id' of 'Channel' object has no setter")
     # AttributeError: property 'channel_id' of 'Channel' object has no setter
 
     # можем получить объект для работы с API вне класса
