@@ -1,11 +1,11 @@
 import json
-
 import googleapiclient.discovery
 from googleapiclient.discovery import build, Resource
-
 from src.config import API_KEY_YOUTUBE
+from functools import total_ordering
 
 
+@total_ordering
 class Channel:
     """Класс для ютуб-канала"""
 
@@ -22,9 +22,9 @@ class Channel:
             __channel_title (str): Название YouTube-канала.
             __channel_description (str): Описание YouTube-канала.
             __channel_url (str): Ссылка на YouTube-канал.
-            __subscriber_count (str): Количество подписчиков YouTube-канала.
-            __video_count (str): Количество видео на YouTube-канале.
-            __view_count (str): Общее количество просмотров YouTube-канала.
+            __subscriber_count (int): Количество подписчиков YouTube-канала.
+            __video_count (int): Количество видео на YouTube-канале.
+            __view_count (int): Общее количество просмотров YouTube-канала.
 
         """
         self.__channel_id = channel_id
@@ -35,6 +35,77 @@ class Channel:
         self.__subscriber_count = int(self.__youtube['items'][0]['statistics']['subscriberCount'])
         self.__video_count = int(self.__youtube['items'][0]['statistics']['videoCount'])
         self.__view_count = int(self.__youtube['items'][0]['statistics']['viewCount'])
+
+    def __str__(self) -> str:
+        """
+               Возвращает строковое представление объекта Channel.
+               Формат: Название канала (URL канала)
+
+               Возвращает:
+                   str: Строковое представление объекта Channel.
+        """
+        return f"{self.__channel_title} ({self.__channel_url})"
+
+    def __eq__(self, other) -> bool:
+        """
+              Проверяет, равен ли данный объект Channel другому объекту по количеству подписчиков.
+
+              Аргументы:
+                  other (Channel): Другой объект Channel для сравнения.
+
+              Возвращает:
+                  bool: True, если количество подписчиков равно; False в противном случае.
+        """
+        return self.__subscriber_count == other.__subscriber_count
+
+    def __lt__(self, other) -> bool:
+        """
+                Проверяет, является ли данный объект Channel "меньшим" по количеству подписчиков, чем другой объект.
+
+                Аргументы:
+                    other (Channel): Другой объект Channel для сравнения.
+
+                Возвращает:
+                    bool: True, если количество подписчиков меньше; False в противном случае.
+        """
+        return self.__subscriber_count < other.__subscriber_count
+
+    def __add__(self, other) -> int:
+        """
+                Складывает количество подписчиков данного объекта Channel с количеством подписчиков другого объекта.
+
+                Аргументы:
+                    other (Channel): Другой объект Channel для сложения.
+
+                Возвращает:
+                    int: Сумму количества подписчиков.
+        """
+        return self.__subscriber_count + other.__subscriber_count
+
+    def __rsub__(self, other) -> int:
+        """
+                Вычитает количество подписчиков данного объекта Channel из количества подписчиков другого объекта.
+                (Вычитание выполняется в обратном порядке, other - self).
+
+                Аргументы:
+                    other (Channel): Другой объект Channel для вычитания.
+
+                Возвращает:
+                    int: Разность количества подписчиков (other - self).
+        """
+        return other.__subscriber_count - self.__subscriber_count
+
+    def __sub__(self, other) -> int:
+        """
+                Вычитает количество подписчиков другого объекта Channel из количества подписчиков данного объекта.
+
+                Аргументы:
+                    other (Channel): Другой объект Channel для вычитания.
+
+                Возвращает:
+                    int: Разность количества подписчиков (self - other).
+        """
+        return self.__subscriber_count - other.__subscriber_count
 
     @property
     def channel_id(self) -> str:
