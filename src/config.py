@@ -1,0 +1,3 @@
+import os
+API_KEY_YOUTUBE = os.getenv("API_KEY_YOUTUBE")
+CHANNEL_ID = 'UC-OVMPlMA3-YCIeg4z5z23A'
