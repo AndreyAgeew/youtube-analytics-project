@@ -3,6 +3,7 @@ import json
 from src.channel import Channel
 from src.video import Video, PLVideo
 from src.config import CHANNEL_ID, CHANNEL_ID_SECOND
+from src.playlist import PlayList
 
 
 @pytest.fixture
@@ -68,10 +69,24 @@ def channel_info():
             }
         ]
     })
+
+
 @pytest.fixture
 def video():
     return Video("AWX4JnAnjBE")
 
+
 @pytest.fixture
 def pl_video():
     return PLVideo("4fObz_qw9u4", "PLv_zOGKKxVph_8g2Mqc3LMhj0M_BfasbC")
+
+
+@pytest.fixture
+def playlist():
+    playlist = PlayList('PLv_zOGKKxVpj-n2qLkEM2Hj96LO6uqgQw')
+    return playlist
+@pytest.fixture
+def duration(playlist):
+    return playlist.total_duration
+
+
