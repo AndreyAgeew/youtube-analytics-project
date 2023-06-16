@@ -1,12 +1,18 @@
 import pytest
 import json
 from src.channel import Channel
-from src.config import CHANNEL_ID
+from src.config import CHANNEL_ID, CHANNEL_ID_SECOND
 
 
 @pytest.fixture
 def channel():
     channel = Channel(CHANNEL_ID)
+    return channel
+
+
+@pytest.fixture
+def channel_second():
+    channel = Channel(CHANNEL_ID_SECOND)
     return channel
 
 
