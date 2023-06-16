@@ -1,7 +1,7 @@
 import json
 
 import googleapiclient.discovery
-from googleapiclient.discovery import build
+from googleapiclient.discovery import build, Resource
 
 from src.config import API_KEY_YOUTUBE
 
@@ -46,7 +46,7 @@ class Channel:
         print(json.dumps(self.__youtube, indent=2, ensure_ascii=False))
 
     @classmethod
-    def get_service(cls) -> googleapiclient.discovery.build:
+    def get_service(cls) -> googleapiclient.discovery.Resource:
         """Возвращает объект службы YouTube API для выполнения запросов к API."""
         return build('youtube', 'v3', developerKey=API_KEY_YOUTUBE)
 
